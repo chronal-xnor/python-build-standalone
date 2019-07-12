@@ -20,7 +20,7 @@ if [ "${CC}" = "musl-clang" ]; then
     EXTRA_FLAGS="no-async -DOPENSSL_NO_ASYNC -D__STDC_NO_ATOMICS__=1 no-engine -DOPENSSL_NO_SECURE_MEMORY "
 fi
 
-/usr/bin/perl ./Configure --prefix=/tools/deps linux-x86_64 no-shared ${EXTRA_FLAGS}
+/usr/bin/perl ./Configure -shared --prefix=/build/out/tools/deps linux-x86_64 ${EXTRA_FLAGS}
 
-make -j `nproc`
-make -j `nproc` install DESTDIR=/build/out
+make
+make install

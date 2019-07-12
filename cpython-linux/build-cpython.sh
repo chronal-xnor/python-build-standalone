@@ -17,7 +17,7 @@ export LLVM_PROFDATA=/tools/clang-linux64/bin/llvm-profdata
 # We force linking of external static libraries by removing the shared
 # libraries. This is hacky. But we're building in a temporary container
 # and it gets the job done.
-find /tools/deps -name '*.so*' -exec rm {} \;
+# find /tools/deps -name '*.so*' -exec rm {} \;
 
 tar -xf Python-${PYTHON_VERSION}.tar.xz
 unzip setuptools-${SETUPTOOLS_VERSION}.zip
@@ -91,6 +91,9 @@ CFLAGS=$CFLAGS CPPFLAGS=$CFLAGS LDFLAGS=$LDFLAGS \
 
 # Supplement produced Makefile with our modifications.
 cat ../Makefile.extra >> Makefile
+
+# find dynamic libssl
+export LD_LIBRARY_PATH=/tools/deps/lib
 
 make -j `nproc`
 make -j `nproc` install DESTDIR=/build/out/python

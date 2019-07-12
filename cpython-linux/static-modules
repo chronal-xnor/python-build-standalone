@@ -14,7 +14,8 @@ _dbm _dbmmodule.c -DHAVE_BERKDB_H -DDB_DBM_HSEARCH -I/tools/deps/include -L/tool
 _elementtree _elementtree.c -DHAVE_EXPAT_CONFIG_H=1 -DXML_POOR_ENTROPY=1 -DUSE_PYEXPAT_CAPI -IModules/expat
 # Cannot build _gdbm due to use of bdb.
 #_gdbm _gdbmmodule.c -DHAVE_NDBM_H -I/tools/deps/include -L/tools/deps/lib -lgdbm
-_hashlib _hashopenssl.c -I/tools/deps/include -L/tools/deps/lib -lssl -lcrypto
+# Don't static-link hashlib (openssl)
+# _hashlib _hashopenssl.c -I/tools/deps/include -L/tools/deps/lib -lssl -lcrypto
 _json _json.c
 _lsprof _lsprof.c rotatingtree.c
 _lzma _lzmamodule.c -I/tools/deps/include -L/tools/deps/lib -llzma
@@ -24,7 +25,8 @@ _multiprocessing _multiprocessing/multiprocessing.c _multiprocessing/semaphore.c
 _opcode _opcode.c
 _queue _queuemodule.c
 _sqlite3 _sqlite/cache.c _sqlite/connection.c _sqlite/cursor.c _sqlite/microprotocols.c _sqlite/module.c _sqlite/prepare_protocol.c _sqlite/row.c _sqlite/statement.c _sqlite/util.c -I/tools/deps/include -IModules/_sqlite -DMODULE_NAME=\"sqlite3\" -DSQLITE_OMIT_LOAD_EXTENSION=1 -L/tools/deps/lib -lsqlite3
-# _ssl _ssl.c -I/tools/deps/include -lssl -lcrypto
+# Don't static-link ssl (openssl)
+# _ssl _ssl.c -I/tools/deps/include -L/tools/deps/lib -l:libssl.so -lcrypto
 _testbuffer _testbuffer.c
 _testimportmultiple _testimportmultiple.c
 _testmultiphase _testmultiphase.c
